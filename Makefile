@@ -1,16 +1,13 @@
 ERL ?= erl
 EBIN_DEPS_DIRS := $(wildcard deps/*/ebin)
 
-all: deps compile
+all: compile test
 
 compile:
-	@./rebar compile
+	@rebar3 compile
 
 test:
-	@./rebar eunit skip_deps=true
-
-deps:
-	@./rebar get-deps
+	@rebar3 eunit
 
 run:
 	@$(ERL) -pa ebin/ -pa $(EBIN_DEPS_DIRS)
